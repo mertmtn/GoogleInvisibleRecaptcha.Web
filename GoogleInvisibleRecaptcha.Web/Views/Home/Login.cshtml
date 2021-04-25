@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewData["Title"] = "Giriş Formu";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+} 
+
+<script>
+    function formSubmitCallBack(response) {
+        $("#login-form").submit();
+        return true;
+    }
+
+    function validate() {
+        try {
+            $("#login-form").validate({
+                rules: {
+                    username: { required: true },
+                    password: { required: true }
+                },
+                errorClass: "errorForm",
+                messages: {
+                    username: { required: "Lütfen kullanıcı adınızı giriniz!" },
+                    password: { required: "Lütfen şifrenizi giriniz!" }
+                },
+                submitHandler: function (form) {
+                    if (grecaptcha.getResponse()) {
+                        var response = grecaptcha.getResponse();
+
+                        $.ajax({
+                            url: "/Recaptcha/CheckInvisibleCaptchaValid",
+                            type: "POST",
+                            data: { "g-recaptcha-response": response},
+                           
+                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                            success: function (response) {
+                                if (response && response.success) {
+                                    alert("Captcha doğrulandı, form submit edilebilir.");
+                                }
+                                else {
+                                    console.error("Captcha hatası!")
+                                    grecaptcha.reset();
+                                    grecaptcha.execute();
+                                }
+                            },
+                            error: function (err) {
+                                grecaptcha.reset();
+                            }
+                        });
+
+                    } else {
+                        grecaptcha.reset();
+                        grecaptcha.execute();
+                    }
+                    return false;
+                }
+
+            });
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+</script>
+<div id="login">
+    <h3 class="text-center text-white pt-5">Görünmez Captcha Test</h3>
+    <div class="container">
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-6">
+                <div id="login-box" class="col-md-12">
+                    <form id="login-form" class="form">
+                        <h3 class="text-center text-info">Giriş Yap</h3>
+                        <div class="form-group">
+                            <label for="username" class="text-info">Kullanıcı Adı:</label><br>
+                            <input type="text" name="username" id="username" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="text-info">Şifre:</label><br>
+                            <input type="password" name="password" id="password" class="form-control">
+                        </div>
+
+                        <div class="g-recaptcha"  
+                             data-sitekey="@ViewBag.SiteKey"
+                             data-callback="formSubmitCallBack"
+                             data-size="invisible"></div>
+
+                        <div class="form-group">
+                            <input type="submit" onclick="validate();" class="btn btn-info btn-md" value="Giriş Yap">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
