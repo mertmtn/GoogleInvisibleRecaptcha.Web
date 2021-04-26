@@ -13,11 +13,7 @@
 } 
 
 <script>
-    function formSubmitCallBack(response) {
-        $("#login-form").submit();
-        return true;
-    }
-
+    
     function validate() {
         try {
             $("#login-form").validate({
@@ -88,7 +84,7 @@
 
                         <div class="g-recaptcha"  
                              data-sitekey="@ViewBag.SiteKey"
-                             data-callback="formSubmitCallBack"
+                            
                              data-size="invisible"></div>
 
                         <div class="form-group">
