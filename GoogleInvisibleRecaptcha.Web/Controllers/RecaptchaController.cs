@@ -7,18 +7,18 @@ namespace GoogleInvisibleRecaptcha.Web.Controllers
 {
     public class RecaptchaController : Controller
     { 
-        private readonly IOptions<GoogleInVisibleRecaptcha> _invisibleRecaptchaOptions;
+        private readonly GoogleInVisibleRecaptcha _invisibleRecaptchaOptions;
 
         public RecaptchaController(IOptions<GoogleInVisibleRecaptcha> invisibleRecaptchaOptions)
         {
-            _invisibleRecaptchaOptions = invisibleRecaptchaOptions;
+            _invisibleRecaptchaOptions = invisibleRecaptchaOptions.Value;
         }
 
         [HttpPost]
         public JsonResult CheckInvisibleCaptchaValid()
         {
             var response = HttpContext.Request.Form["g-recaptcha-response"];
-            var secretKey = _invisibleRecaptchaOptions.Value.SecretKey;
+            var secretKey = _invisibleRecaptchaOptions.SecretKey;
 
             var captchaResponse = ReCaptchaManager.CheckInvisibleCaptchaValid(secretKey, response);
             return Json(captchaResponse);

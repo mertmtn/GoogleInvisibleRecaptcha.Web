@@ -7,16 +7,16 @@ namespace GoogleInvisibleRecaptcha.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IOptions<GoogleInVisibleRecaptcha> _invisibleRecaptchaOptions;
+        private readonly GoogleInVisibleRecaptcha _invisibleRecaptchaOptions;
 
         public HomeController(IOptions<GoogleInVisibleRecaptcha> invisibleRecaptchaOptions)
         {
-            _invisibleRecaptchaOptions = invisibleRecaptchaOptions;
+            _invisibleRecaptchaOptions = invisibleRecaptchaOptions.Value;
         }
 
         public IActionResult Login()
         {
-            ViewBag.SiteKey = _invisibleRecaptchaOptions.Value.SiteKey;
+            ViewBag.SiteKey = _invisibleRecaptchaOptions.SiteKey;
             return View();
         }
 
