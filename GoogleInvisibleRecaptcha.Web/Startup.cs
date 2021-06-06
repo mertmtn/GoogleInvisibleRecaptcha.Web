@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ReCaptcha.Models;
 
 namespace GoogleInvisibleRecaptcha.Web
 {
@@ -19,6 +20,7 @@ namespace GoogleInvisibleRecaptcha.Web
         public void ConfigureServices(IServiceCollection services)
         {             
             services.AddMvc(); 
+            services.Configure<GoogleInVisibleRecaptcha>(Configuration.GetSection("GoogleInVisibleRecaptcha"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

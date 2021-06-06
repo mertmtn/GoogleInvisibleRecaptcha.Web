@@ -1,20 +1,22 @@
 ﻿using GoogleInvisibleRecaptcha.Web.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Mvc; 
+using Microsoft.Extensions.Options;
+using ReCaptcha.Models;
 
 namespace GoogleInvisibleRecaptcha.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private IConfiguration _configuration;
+        private readonly IOptions<GoogleInVisibleRecaptcha> _invisibleRecaptchaOptions;
 
-        public HomeController(IConfiguration configuration)
+        public HomeController(IOptions<GoogleInVisibleRecaptcha> invisibleRecaptchaOptions)
         {
-            _configuration = configuration;
+            _invisibleRecaptchaOptions = invisibleRecaptchaOptions;
         }
+
         public IActionResult Login()
         {
-            ViewBag.SiteKey = _configuration.GetSection("GoogleInVisibleRecptcha").GetSection("SiteKey").Value;
+            ViewBag.SiteKey = _invisibleRecaptchaOptions.Value.SiteKey;
             return View();
         }
 

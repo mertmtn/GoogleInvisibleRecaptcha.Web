@@ -1,23 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using ReCaptcha.Business; 
+﻿using Microsoft.AspNetCore.Mvc; 
+using Microsoft.Extensions.Options;
+using ReCaptcha.Business;
+using ReCaptcha.Models;
 
 namespace GoogleInvisibleRecaptcha.Web.Controllers
 {
     public class RecaptchaController : Controller
-    {
-        private IConfiguration _configuration;
+    { 
+        private readonly IOptions<GoogleInVisibleRecaptcha> _invisibleRecaptchaOptions;
 
-        public RecaptchaController(IConfiguration configuration)
+        public RecaptchaController(IOptions<GoogleInVisibleRecaptcha> invisibleRecaptchaOptions)
         {
-            _configuration = configuration;
+            _invisibleRecaptchaOptions = invisibleRecaptchaOptions;
         }
 
         [HttpPost]
         public JsonResult CheckInvisibleCaptchaValid()
         {
             var response = HttpContext.Request.Form["g-recaptcha-response"];
-            var captchaResponse = new ReCaptchaManager(_configuration).CheckInvisibleCaptchaValid(response);
+            var secretKey = _invisibleRecaptchaOptions.Value.SecretKey;
+
+            var captchaResponse = ReCaptchaManager.CheckInvisibleCaptchaValid(secretKey, response);
             return Json(captchaResponse);
         }
     }
