@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31129.286
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.32912.340
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleInvisibleRecaptcha.Web", "GoogleInvisibleRecaptcha.Web\GoogleInvisibleRecaptcha.Web.csproj", "{526B4F36-00F1-446B-9FB1-023EF69A63CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoogleInvisibleRecaptcha.Web", "GoogleInvisibleRecaptcha.Web\GoogleInvisibleRecaptcha.Web.csproj", "{526B4F36-00F1-446B-9FB1-023EF69A63CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReCaptcha.Business", "ReCaptchaBusiness\ReCaptcha.Business.csproj", "{13769CFE-C42D-4F64-8918-A55B8441CCF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReCaptcha.Business", "ReCaptchaBusiness\ReCaptcha.Business.csproj", "{13769CFE-C42D-4F64-8918-A55B8441CCF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReCaptcha.Models", "ReCaptcha.Models\ReCaptcha.Models.csproj", "{7A9C7026-3835-4DBE-992B-6B19EDDB6048}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReCaptcha.Models", "ReCaptcha.Models\ReCaptcha.Models.csproj", "{7A9C7026-3835-4DBE-992B-6B19EDDB6048}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleReCaptcha.Core", "GoogleReCaptcha.Core\GoogleReCaptcha.Core.csproj", "{A99D80B7-9E1E-4FD1-86E1-F251F24564DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{7A9C7026-3835-4DBE-992B-6B19EDDB6048}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A9C7026-3835-4DBE-992B-6B19EDDB6048}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A9C7026-3835-4DBE-992B-6B19EDDB6048}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A99D80B7-9E1E-4FD1-86E1-F251F24564DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A99D80B7-9E1E-4FD1-86E1-F251F24564DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A99D80B7-9E1E-4FD1-86E1-F251F24564DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A99D80B7-9E1E-4FD1-86E1-F251F24564DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
